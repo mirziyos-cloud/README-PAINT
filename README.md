@@ -73,8 +73,10 @@ def main():
 
         if len(shared_words) > 0:
             print("- %s (%d shared theme(s): %s)" % (title, len(shared_words), ", ".join(shared_words)))
-```
 
+main()
+```
+This tiny example just counts how many descriptive words two books share — a real version would use a bigger dataset and a proper similarity method (see below), but the basic idea is the same: compare, score, and recommend.
 
 ## Data sources and AI methods
 The book descriptions could come from a public source, such as:
@@ -96,17 +98,16 @@ Nearest neighbor	Finds the books whose numbers are most similar to the liked boo
 
 ## Challenges
 
-What does your project _not_ solve? Which limitations and ethical considerations should be taken into account when deploying a solution like this?
+BookBuddy does not understand a book's actual quality, writing style, or emotional tone — only the words used in its description. It also can't account for personal mood (sometimes we want something completely different from our usual taste!). A production version would need a much larger, carefully checked dataset, and should be transparent with users about how recommendations are generated, so people aren't nudged only toward whatever is easiest to recommend.
 
 ## What next?
 
-How could your project grow and become something even more? What kind of skills, what kind of assistance would you  need to move on? 
+The next step would be to build a small web page where users can actually type in a book title and see live recommendations, using a real dataset of book descriptions instead of the four-book example above. Learning more about natural language processing (turning text into numbers more accurately than just counting shared words) would make the recommendations much better. I'd also like feedback from real readers on whether the suggestions actually feel relevant.
 
 
 ## Acknowledgments
 
-* list here the sources of inspiration 
-* do not use code, images, data etc. from others without permission
-* when you have permission to use other people's materials, always mention the original creator and the open source / Creative Commons licence they've used
-  <br>For example: [Sleeping Cat on Her Back by Umberto Salvagnin](https://commons.wikimedia.org/wiki/File:Sleeping_cat_on_her_back.jpg#filelinks) / [CC BY 2.0](https://creativecommons.org/licenses/by/2.0)
+*Inspired by the nearest-neighbor and tf-idf exercises from the Building AI course
+*Example book descriptions written by me for demonstration purposes
+*Do not use code, images, or data from others without permission — when using other people's materials, always credit the original creator and their open license <br>For example: Sleeping Cat on Her Back by Umberto Salvagnin / CC BY 2.0(https://creativecommons.org/licenses/by/2.0)
 * etc
