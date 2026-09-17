@@ -2,58 +2,91 @@
 created by Reaktor Innovations and University of Helsinki. 
 Copy the template, paste it to your GitHub README and edit! -->
 
-# Project Title
+# BOOKBUDDY
 
 Final project for the Building AI course
+By Mirziyor Sodikov
+
 
 ## Summary
 
-Describe briefly in 2-3 sentences what your project is about. About 250 characters is a nice length! 
+BookBuddy is a simple AI tool that suggests new books to read based on books a person already liked. It compares books by their descriptions and recommends the ones that are most similar, so readers spend less time searching and more time reading.
 
 
 ## Background
 
-Which problems does your idea solve? How common or frequent is this problem? What is your personal motivation? Why is this topic important or interesting?
+Finding a good book to read next can take a long time. Online stores show thousands of options, and it's hard to know which ones actually match what you enjoy.
 
-This is how you make a list, if you need one:
-* problem 1
-* problem 2
-* etc.
+Readers waste time browsing long lists of books that don't interest them
+Small libraries and local bookshops often don't have a recommendation system at all
+Generic "bestseller" lists don't consider personal taste
+
+I chose this topic because I love reading, and I've often given up looking for a new book simply because there were too many choices. A simple, honest recommendation tool would have saved me a lot of time — and could help other readers too
 
 
 ## How is it used?
 
-Describe the process of using the solution. In what kind situations is the solution needed (environment, time, etc.)? Who are the users, what kinds of needs should be taken into account?
+How is it used?
 
+A user types in the name of a book they liked. BookBuddy looks at the words used to describe that book (its genre, summary, and themes) and compares them to all the other books in its dataset. It then prints out a short list of the most similar books.
+
+This is useful for:
+
+Someone who just finished a book and doesn't know what to read next
+A small library wanting to offer basic recommendations without expensive software
+A student learning how recommendation systems work, using a small and understandable example
+
+This is a beginner-level project, so the example below uses very simple Python — no advanced libraries required
 Images will make your README look nice!
+
 Once you upload an image to your repository, you can link link to it like this (replace the URL with file path, if you've uploaded an image to Github.)
-![Cat](https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg)
+![research](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNNuGPQqjrRjYZz-ETVpcnQv67bq4oGmC6BuvSWgtBb6BoS0Qh6NIGUuhy&s=10)
 
 If you need to resize images, you have to use an HTML tag, like this:
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg" width="300">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyRztgiXLqHhjc9wyDQxun2XIDWf_eeTHaOCCqXBymk990EboiZoAj-CV5&s=10" width="300">
 
 This is how you create code examples:
 ```
 def main():
-   countries = ['Denmark', 'Finland', 'Iceland', 'Norway', 'Sweden']
-   pop = [5615000, 5439000, 324000, 5080000, 9609000]   # not actually needed in this exercise...
-   fishers = [1891, 2652, 3800, 11611, 1757]
+    # a very small example "database" of books and their descriptions
+    books = {
+        "Dune": "desert planet politics prophecy spice empire",
+        "The Hobbit": "adventure dragon treasure journey friendship",
+        "Foundation": "empire politics future science prediction",
+        "The Lord of the Rings": "adventure journey friendship fellowship quest"
+    }
 
-   totPop = sum(pop)
-   totFish = sum(fishers)
+    # ask the user which book they liked
+    liked_book = "Dune"  # in a real program, this would come from user input
 
-   # write your solution here
+    liked_words = set(books[liked_book].split())
 
-   for i in range(len(countries)):
-      print("%s %.2f%%" % (countries[i], 100.0))    # current just prints 100%
+    print("Because you liked '%s', you might also like:" % liked_book)
 
-main()
+    # compare the liked book to every other book
+    for title, description in books.items():
+        if title == liked_book:
+            continue  # don't recommend the same book
+
+        words = set(description.split())
+        shared_words = liked_words & words  # words in common
+
+        if len(shared_words) > 0:
+            print("- %s (%d shared theme(s): %s)" % (title, len(shared_words), ", ".join(shared_words)))
 ```
 
 
 ## Data sources and AI methods
-Where does your data come from? Do you collect it yourself or do you use data collected by someone else?
-If you need to use links, here's an example:
+The book descriptions could come from a public source, such as:
+
+Open Library API
+
+A more advanced version of BookBuddy could use the tf-idf and nearest-neighbor methods covered in the Building AI course: each book's description is turned into a list of numbers (a vector), and the books whose vectors are "closest" to the liked book are recommended — the same idea used to compare cabin prices or classify data points in the course exercises, just applied to text instead of numbers.
+
+Method	What it does
+tf-idf	Turns each book's description into a set of weighted numbers, giving more importance to distinctive words
+Nearest neighbor	Finds the books whose numbers are most similar to the liked book
+
 [Twitter API](https://developer.twitter.com/en/docs)
 
 | Syntax      | Description |
